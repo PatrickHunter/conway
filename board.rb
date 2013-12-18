@@ -25,8 +25,8 @@ class Board
     for i in 0..(size-1)
       new_grid[i] =Array.new(size)
     end
-    @grid.each_with_index do |colum, outer_index|
-      colum.each_with_index do |cell, index|        
+    @grid.each_with_index do |row, outer_index|
+      row.each_with_index do |cell, index|        
         new_grid[outer_index][index] = live?(outer_index,index)
       end
     end
@@ -34,12 +34,12 @@ class Board
   end
 
   def live?(outer_index, index)
-    live_neighbors = row(outer_index, index)-1
+    live_neighbors = col(outer_index, index)-1
     if outer_index > 0 then
-      live_neighbors += row(outer_index-1 ,index)
+      live_neighbors += col(outer_index-1 ,index)
     end
     if outer_index +1 <@size then
-      live_neighbors +=row(outer_index+1, index)
+      live_neighbors +=col(outer_index+1, index)
     end
     
     if !@grid[outer_index][index] then
@@ -57,7 +57,7 @@ class Board
     end
   end
 
-  def row(outer_index, index)
+  def col(outer_index, index)
     count=0
     if index > 0 && @grid[outer_index][index-1] then
       count+=1
@@ -66,11 +66,22 @@ class Board
       count+=1
     end
     if index+1 <@size && @grid[outer_index][index+1] then
-      puts @grid[outer_index][index+1]
       count+=1
     end
     return count
   end
-
+  
+  def display()
+    grid.each do |row|
+      row.each do |cell|
+        if cell then
+          print "|*"
+        else
+          print "| "
+        end
+      end
+      puts "|"
+    end
+  end  
 end
 

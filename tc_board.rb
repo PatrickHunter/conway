@@ -9,7 +9,7 @@ class TestBoard < Test::Unit::TestCase
     assert_equal(sample.size, Board.new(sample).size)
   end
   
-  "def test_live
+  def test_live
     board = Board.new([[true,true,true],[true,false,true],[true,true,true]])
     assert(board.live?(0,0))
     assert(!board.live?(0,1))
@@ -20,11 +20,12 @@ class TestBoard < Test::Unit::TestCase
     assert(board.live?(2,0))
     assert(!board.live?(2,1))
     assert(board.live?(2,2))
-end"
+  end
   
   def test_step
     board = Board.new([[true,false,true],[false,true,true],[true,true,false]])
     board.step
     assert_equal([[false,false,true],[false,false,true],[true,true,true]],board.grid)
   end
+  
 end
